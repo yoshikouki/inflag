@@ -2,11 +2,12 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
-
+import useSWR from "swr";
 import { api, apiHooks } from "~/utils/api";
 
 const Home: NextPage = () => {
-  const helloHook = apiHooks.example.hello.useQuery({ text: "from tRPC" });
+  const helloHook = apiHooks.example.hello.useQuery({ text: "from tRPC with Hook API" });
+  const { data: hello } = useSWR("/api/hello", async (url) => api.example.hello.query({ text: "from tRPC with Vanilla Client" }))
 
   return (
     <>
@@ -46,7 +47,12 @@ const Home: NextPage = () => {
           </div>
           <div className="flex flex-col items-center gap-2">
             <p className="text-2xl text-white">
-              {helloHook.data ? helloHook.data.greeting : "Loading tRPC query..."}
+              {helloHook.data
+                ? helloHook.data.greeting
+                : "Loading tRPC query..."}
+            </p>
+            <p className="text-2xl text-white">
+              {hello?.greeting || "Loading tRPC query..."}
             </p>
             <AuthShowcase />
           </div>
