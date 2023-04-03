@@ -1,5 +1,4 @@
 import { type NextPage } from "next";
-import { BattleCharacterDetails } from "~/components/battle/BattleCharacterDetails";
 import { BattleStatus } from "~/components/battle/BattleStatus";
 import { api } from "~/utils/api";
 import { useSWR } from "~/utils/swr";
