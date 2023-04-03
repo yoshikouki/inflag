@@ -1,4 +1,5 @@
 import { type Character } from "~/server/services/battle.service";
+import { BattleCharacterStatus } from "./BattleCharacterStatus";
 import { BattleCharacterStatusBar } from "./BattleCharacterStatusBar";
 
 interface Props {
@@ -19,46 +20,19 @@ export const BattleStatus = ({ character, enemy }: Props) => {
   const maxHitPoint = Math.max(character.hitPoint, enemy.hitPoint);
   return (
     <>
-      {[character, enemy].map((c, index) => (
-        <div key={index} className="mb-16 overflow-hidden">
-          <h3 className="mb-2 text-4xl font-bold">
-            {c.name}
-          </h3>
+      <BattleCharacterStatus
+        character={character}
+        maxHitPoint={maxHitPoint}
+        maxCharacterStatus={maxCharacterStatus}
+      />
 
-          <div className="mb-2">
-            <span className="text-gray-400">Lv:</span> {c.level}
-          </div>
+      <p className="mb-12 mt-4 animate-pulse text-center text-4xl opacity-60">vs</p>
 
-          <div className="mb-2">
-            <BattleCharacterStatusBar
-              statusName="hitPoint"
-              value={c.hitPoint}
-              max={maxHitPoint}
-            />
-          </div>
-          <div className="mb-2">
-            <BattleCharacterStatusBar
-              statusName="attack"
-              value={c.attack}
-              max={maxCharacterStatus}
-            />
-          </div>
-          <div className="mb-2">
-            <BattleCharacterStatusBar
-              statusName="defense"
-              value={c.defense}
-              max={maxCharacterStatus}
-            />
-          </div>
-          <div className="mb-2">
-            <BattleCharacterStatusBar
-              statusName="speed"
-              value={c.speed}
-              max={maxCharacterStatus}
-            />
-          </div>
-        </div>
-      ))}
+      <BattleCharacterStatus
+        character={enemy}
+        maxHitPoint={maxHitPoint}
+        maxCharacterStatus={maxCharacterStatus}
+      />
     </>
   );
 };
