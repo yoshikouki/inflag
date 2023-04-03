@@ -20,8 +20,10 @@ export const BattleStatus = ({ character, enemy }: Props) => {
   return (
     <>
       {[character, enemy].map((c, index) => (
-        <div key={index} className="mb-16">
-          <h3 className="mb-2 text-4xl font-bold">{c.name}</h3>
+        <div key={index} className="mb-16 overflow-hidden">
+          <h3 className="mb-2 text-4xl font-bold">
+            {c.name}
+          </h3>
 
           <div className="mb-2">
             <span className="text-gray-400">Lv:</span> {c.level}

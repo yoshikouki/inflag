@@ -20,17 +20,14 @@ export const BattleCharacterStatusBar = ({ statusName, value, max }: Props) => {
 
   return (
     <>
-      <div className="w-full overflow-hidden rounded-lg bg-gray-400">
+      <div className="overflow-hiddenflex relative h-10 w-full rounded-lg bg-gray-400">
         <div
-          className="flex h-10 items-center rounded-lg  bg-green-500"
+          className="absolute h-10 animate-slide-right rounded-lg bg-green-500"
           style={{ width: `${percentage}%` }}
-        >
-          <div className="whitespace-nowrap pl-4 text-white">
-            <span className="mr-1">
-              {statusIcons[statusName] || statusName}
-            </span>
-            {value}
-          </div>
+        />
+        <div className="absolute py-2 pl-4 text-white opacity-90">
+          <span className="mr-1">{statusIcons[statusName] || statusName}</span>
+          {value}
         </div>
       </div>
     </>
