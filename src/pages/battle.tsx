@@ -1,30 +1,22 @@
 import { type NextPage } from "next";
-import { CharacterDetails } from "~/components/battle/CharacterDetails";
+import { BattleCharacterDetails } from "~/components/battle/BattleCharacterDetails";
+import { BattleStatus } from "~/components/battle/BattleStatus";
 import { api } from "~/utils/api";
 import { useSWR } from "~/utils/swr";
 
 const Home: NextPage = () => {
-  const { data: result } = useSWR("/battle", async (url) =>
+  const { data: result } = useSWR("/battle", async () =>
     api.battle.start.mutate()
   );
 
   return (
-    <main className="rounded-lg bg-gray-800 p-6 text-white">
-      <h2 className="mb-6 text-3xl font-bold">Battle!!1</h2>
-
+    <main className="p-6">
       {result && (
         <>
-          <div className="flex flex-col gap-6 md:flex-row">
-            <div className="flex-1">
-              <CharacterDetails character={result.character} />
-            </div>
-            <div className="flex-1">
-              <CharacterDetails character={result.enemy} />
-            </div>
-          </div>
+          <BattleStatus character={result.character} enemy={result.enemy} />
 
-          <p className="mb-4 mt-8 text-2xl">
-            {result.isPlayerWin ? "You win!" : "You lose!"}
+          <p className="mb-4 mt-8 text-8xl">
+            {result.isPlayerWin ? "Win" : "Lose"}
           </p>
 
           <ul className="text-xl">

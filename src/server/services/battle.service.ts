@@ -18,7 +18,7 @@ const generateCharacter = () => {
     id: faker.datatype.uuid(),
     name: faker.internet.userName(),
     level: faker.datatype.number({ min: 1, max: 100 }),
-    hitPoints: faker.datatype.number({ min: 10, max: 100 }),
+    hitPoint: faker.datatype.number({ min: 10, max: 100 }),
     attack: faker.datatype.number({ min: 1, max: 10 }),
     defense: faker.datatype.number({ min: 1, max: 10 }),
     speed: faker.datatype.number({ min: 1, max: 10 }),
@@ -36,7 +36,7 @@ const calculateRewards = (enemy: Character, isPlayerWin: boolean) => {
   const rewards = isPlayerWin
     ? {
         exp: enemy.level * 10,
-        gold: enemy.hitPoints + enemy.attack + enemy.defense + enemy.speed,
+        gold: enemy.hitPoint + enemy.attack + enemy.defense + enemy.speed,
       }
     : {
         exp: enemy.level,
