@@ -1,8 +1,14 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
+import {
+  faGear,
+  faMoon,
+  faSignOut,
+  faSun,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import HeaderProfile from "./HeaderProfile";
+import Image from "next/image";
 import Link from "next/link";
 import { useAuth } from "~/hooks/auth";
 import useTheme from "~/hooks/theme";
@@ -24,25 +30,77 @@ const HeaderNavigation = () => {
             {isLoading ? (
               <div className="btn-disabled btn-circle btn">Loading</div>
             ) : user ? (
-              <HeaderProfile user={user} logout={logout} />
+              <div className="dropdown-hover dropdown-end dropdown">
+                <label tabIndex={0} className="btn-ghost btn-circle btn">
+                  <div className="avatar">
+                    <div className="w-8 rounded-full">
+                      {user.image ? (
+                        <Image
+                          src={user.image}
+                          alt={user.name || "プロフィール画像"}
+                          width={32}
+                          height={32}
+                        />
+                      ) : (
+                        <FontAwesomeIcon icon={faUser} size="lg" />
+                      )}
+                    </div>
+                  </div>
+                </label>
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content menu w-40 rounded bg-base-100 shadow-md"
+                >
+                  <li className="menu-title">
+                    <span>{user.name}</span>
+                  </li>
+                  <li>
+                    <Link href="/settings">
+                      <FontAwesomeIcon icon={faGear} size="lg" />
+                      Settings
+                    </Link>
+                  </li>
+                  <li>
+                    <button onClick={themeCtx.toggleTheme} type="button">
+                      {themeCtx.theme === "light" ? (
+                        <>
+                          <FontAwesomeIcon icon={faSun} size="lg" />
+                          Light
+                        </>
+                      ) : (
+                        <>
+                          <FontAwesomeIcon icon={faMoon} size="lg" />
+                          Dark
+                        </>
+                      )}
+                    </button>
+                  </li>
+                  <li>
+                    <a onClick={logout}>
+                      <FontAwesomeIcon icon={faSignOut} size="lg" />
+                      Logout
+                    </a>
+                  </li>
+                </ul>
+              </div>
             ) : (
               <>
                 <button onClick={login} className="btn-ghost btn" type="button">
                   Login
                 </button>
+                <button
+                  onClick={themeCtx.toggleTheme}
+                  className="btn-ghost btn-circle btn"
+                  type="button"
+                >
+                  {themeCtx.theme === "light" ? (
+                    <FontAwesomeIcon icon={faSun} size="lg" />
+                  ) : (
+                    <FontAwesomeIcon icon={faMoon} size="lg" />
+                  )}
+                </button>
               </>
             )}
-            <button
-              onClick={themeCtx.toggleTheme}
-              className="btn-ghost btn-circle btn"
-              type="button"
-            >
-              {themeCtx.theme === "light" ? (
-                <FontAwesomeIcon icon={faSun} size="lg" />
-              ) : (
-                <FontAwesomeIcon icon={faMoon} size="lg" />
-              )}
-            </button>
           </div>
         </header>
       </div>
