@@ -18,5 +18,5 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     return { redirect: { destination: "/home" } };
   }
 
-  return {};
+  return { props: {} };
 }
