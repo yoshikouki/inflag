@@ -11,7 +11,7 @@ export default {
         },
       },
       animation: {
-        "slide-right": "slide-right 0.3s ease-in-out",
+        "slide-right": "slide-right 0.8s ease-in-out",
       },
     },
   },
