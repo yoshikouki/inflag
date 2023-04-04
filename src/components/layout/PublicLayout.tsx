@@ -17,7 +17,7 @@ const PublicLayout = ({ pageTitle, children }: Props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <HeaderNavigation />
+      <HeaderNavigation accessibleWithoutAuth />
 
       <main className="mx-auto mb-40 mt-12">{children}</main>
     </>

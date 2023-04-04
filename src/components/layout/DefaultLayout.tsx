@@ -2,8 +2,6 @@ import Head from "next/head";
 import HeaderNavigation from "./HeaderNavigation";
 import MainNavigation from "./MainNavigation";
 import { type ReactNode } from "react";
-import { useAuth } from "~/hooks/auth";
-import SignIn from "../SignIn";
 
 interface Props {
   pageTitle?: string;
@@ -11,7 +9,6 @@ interface Props {
 }
 
 const DefaultLayout = ({ pageTitle, children }: Props) => {
-  const { isAuthenticated } = useAuth();
 
   const baseTitle = "InflaG";
   return (
@@ -26,11 +23,7 @@ const DefaultLayout = ({ pageTitle, children }: Props) => {
       <MainNavigation />
 
       <main className="mx-auto mb-40 mt-12 sm:ml-24 lg:ml-80">
-        {isAuthenticated ? (
-          children
-        ) : (
-          <SignIn />
-        )}
+        {children}
       </main>
     </>
   );

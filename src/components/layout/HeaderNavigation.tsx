@@ -13,9 +13,9 @@ import Link from "next/link";
 import { useAuth } from "~/hooks/auth";
 import useTheme from "~/hooks/theme";
 
-const HeaderNavigation = () => {
+const HeaderNavigation = ({ accessibleWithoutAuth = false }) => {
   const themeCtx = useTheme();
-  const { isLoading, user, login, logout } = useAuth();
+  const { isLoading, user, login, logout } = useAuth(accessibleWithoutAuth);
 
   return (
     <>
