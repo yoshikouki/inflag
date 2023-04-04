@@ -1,3 +1,3 @@
 import useSWR from "swr";
 
-export { useSWR }
+export { useSWR };

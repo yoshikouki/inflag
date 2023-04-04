@@ -28,7 +28,8 @@ const ThemeContextProvider = ({ children }: Props) => {
 
   useEffect(() => {
     const hadPreferenceForDark =
-      !("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      !("theme" in localStorage) &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
     if (localStorage.theme === "dark" || hadPreferenceForDark) {
       changeTheme("dark");
     } else {

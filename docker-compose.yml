@@ -3,6 +3,7 @@ version: "3"
 volumes:
   db-data:
 
+
 services:
   db:
     image: postgres:latest
