@@ -1,7 +1,7 @@
 import { type NextPage } from "next";
 import DefaultLayout from "~/components/layout/DefaultLayout";
 
-const Home: NextPage = () => {
+const RootPage: NextPage = () => {
   return (
     <DefaultLayout>
       <h2 className="text-5xl font-extrabold">InflaG</h2>
@@ -9,4 +9,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default RootPage;

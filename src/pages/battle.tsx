@@ -5,7 +5,7 @@ import DefaultLayout from "~/components/layout/DefaultLayout";
 import { api } from "~/utils/api";
 import { useSWR } from "~/utils/swr";
 
-const Home: NextPage = () => {
+const BattlePage: NextPage = () => {
   const { data: result } = useSWR("/battle", async () =>
     api.battle.start.mutate()
   );
@@ -53,4 +53,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default BattlePage;
