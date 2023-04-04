@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import {
   faGear,
   faMoon,
+  faSignIn,
   faSignOut,
   faSun,
   faUser,
@@ -76,7 +76,7 @@ const HeaderNavigation = () => {
                     </button>
                   </li>
                   <li>
-                    <a onClick={logout}>
+                    <a onClick={() => void logout()}>
                       <FontAwesomeIcon icon={faSignOut} size="lg" />
                       Logout
                     </a>
@@ -85,7 +85,12 @@ const HeaderNavigation = () => {
               </div>
             ) : (
               <>
-                <button onClick={login} className="btn-ghost btn" type="button">
+                <button
+                  onClick={() => void login()}
+                  className="btn-ghost btn"
+                  type="button"
+                >
+                  <FontAwesomeIcon icon={faSignIn} size="lg" className="mr-2" />
                   Login
                 </button>
                 <button
