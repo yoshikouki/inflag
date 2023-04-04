@@ -5,6 +5,11 @@ import { apiHooks } from "~/utils/api";
 import { M_PLUS_1 } from "next/font/google";
 import "~/styles/globals.css";
 
+// @see: https://fontawesome.com/docs/web/use-with/react/use-with
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+config.autoAddCss = false;
+
 const mPlus1 = M_PLUS_1({
   weight: ["400", "700", "900"],
   subsets: ["latin"],
