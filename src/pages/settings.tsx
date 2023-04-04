@@ -6,7 +6,7 @@ const Home: NextPage = () => {
   return (
     <DefaultLayout>
       <h2 className="text-5xl font-extrabold">
-        InflaG
+        Settings
       </h2>
     </DefaultLayout>
   );

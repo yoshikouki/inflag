@@ -13,7 +13,7 @@ const navigationItems = [
   },
   {
     title: "Battle",
-    path: "/Battle",
+    path: "/battle",
     icon: <FontAwesomeIcon icon={faDungeon} size="lg" />,
   },
 ];
