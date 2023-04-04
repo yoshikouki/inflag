@@ -21,7 +21,7 @@ const DefaultLayout = ({ pageTitle, children }: Props) => {
       <HeaderNavigation />
       <MainNavigation />
 
-      <main className="mx-auto mt-12 sm:ml-24 lg:ml-80">{children}</main>
+      <main className="mx-auto mt-12 mb-40 sm:ml-24 lg:ml-80">{children}</main>
     </>
   );
 };

@@ -24,12 +24,14 @@ const MainNavigation = () => {
 
   return (
     <>
-      <div className="btm-nav z-20 sm:hidden">
+      <div className="btm-nav z-20 bg-opacity-80 backdrop-blur-sm sm:hidden">
         {navigationItems.map((item, i) => (
           <Link
             href={item.path}
             key={i}
-            className={classNames({ active: isCurrentPage(item.path) })}
+            className={classNames({
+              active: isCurrentPage(item.path),
+            })}
           >
             {item.icon}
           </Link>

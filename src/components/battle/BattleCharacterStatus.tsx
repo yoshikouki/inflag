@@ -11,10 +11,13 @@ export const BattleCharacterStatus = ({ character, maxHitPoint, maxCharacterStat
 
   return (
     <div className="overflow-hidden">
-      <h3 className="mb-2 text-4xl font-bold">{character.name}</h3>
+      <div className="overflow-x-scroll">
+        <h3 className="mb-2 text-4xl font-bold">{character.name}</h3>
+      </div>
 
       <div className="mb-2">
-        <span className="text-gray-400">Lv:</span> {character.level}
+        <span className="text-gray-400 mr-1">Lv</span>
+        <span className="font-bold"> {character.level}</span>
       </div>
 
       <div className="mb-2">

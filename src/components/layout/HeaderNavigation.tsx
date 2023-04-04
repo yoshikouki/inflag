@@ -13,7 +13,7 @@ const HeaderNavigation = () => {
 
   return (
     <>
-      <div className="sticky top-0 z-50 w-full">
+      <div className="sticky top-0 z-50 w-full backdrop-blur-md">
         <header className="navbar h-10 p-4">
           <div className="flex-1">
             <Link href="/">
@@ -27,11 +27,7 @@ const HeaderNavigation = () => {
               <HeaderProfile user={user} logout={logout} />
             ) : (
               <>
-                <button
-                  onClick={login}
-                  className="btn-ghost btn"
-                  type="button"
-                >
+                <button onClick={login} className="btn-ghost btn" type="button">
                   Login
                 </button>
               </>

@@ -25,7 +25,9 @@ export const BattleStatus = ({ character, enemy }: Props) => {
         maxCharacterStatus={maxCharacterStatus}
       />
 
-      <p className="mb-12 mt-4 animate-pulse text-center text-4xl opacity-60">vs</p>
+      <div className="mb-12 mt-4 animate-pulse text-center text-4xl font-extrabold opacity-60">
+        vs
+      </div>
 
       <BattleCharacterStatus
         character={enemy}
