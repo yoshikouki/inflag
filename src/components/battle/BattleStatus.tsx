@@ -1,6 +1,5 @@
 import { type Character } from "~/server/services/battle.service";
 import { BattleCharacterStatus } from "./BattleCharacterStatus";
-import { BattleCharacterStatusBar } from "./BattleCharacterStatusBar";
 
 interface Props {
   character: Character;

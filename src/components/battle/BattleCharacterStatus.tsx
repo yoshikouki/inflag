@@ -1,8 +1,5 @@
-import { faFire, faGaugeSimple, faHeart, faShield } from "@fortawesome/free-solid-svg-icons";
-
 import { BattleCharacterStatusBar } from "./BattleCharacterStatusBar";
-import { Character } from "~/server/services/battle.service";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { type Character } from "~/server/services/battle.service";
 
 interface Props {
   character: Character;
