@@ -2,25 +2,25 @@ import { type Character } from "~/server/services/battle.service";
 import { BattleCharacterStatus } from "./BattleCharacterStatus";
 
 interface Props {
-  character: Character;
+  player: Character;
   enemy: Character;
 }
 
-export const BattleStatus = ({ character, enemy }: Props) => {
+export const BattleStatus = ({ player: player, enemy }: Props) => {
   const getCharacterStatus = ({ attack, defense, speed }: Character) => [
     attack,
     defense,
     speed,
   ];
   const maxCharacterStatus = Math.max(
-    ...getCharacterStatus(character),
+    ...getCharacterStatus(player),
     ...getCharacterStatus(enemy)
   );
-  const maxHitPoint = Math.max(character.hitPoint, enemy.hitPoint);
+  const maxHitPoint = Math.max(player.hitPoint, enemy.hitPoint);
   return (
     <>
       <BattleCharacterStatus
-        character={character}
+        character={player}
         maxHitPoint={maxHitPoint}
         maxCharacterStatus={maxCharacterStatus}
       />

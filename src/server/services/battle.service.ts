@@ -1,12 +1,12 @@
 import { faker } from "@faker-js/faker";
 
 export const startBattle = () => {
-  const character = generateCharacter();
+  const player = generateCharacter();
   const enemy = generateCharacter();
-  const isPlayerWin = executeBattle(character, enemy);
+  const isPlayerWin = executeBattle({ player, enemy });
   const rewards = calculateRewards(enemy, isPlayerWin);
   return {
-    character,
+    player,
     enemy,
     isPlayerWin,
     rewards,
@@ -26,12 +26,19 @@ const generateCharacter = () => {
 };
 export type Character = ReturnType<typeof generateCharacter>;
 
-const executeBattle = (character: Character, enemy: Character) => {
-  const characterSpeed = character.speed;
+const executeBattle = ({
+  player,
+  enemy,
+}: {
+  player: Character;
+  enemy: Character;
+}) => {
+  const playerSpeed = player.speed;
   const enemySpeed = enemy.speed;
-  const isPlayerWin = characterSpeed > enemySpeed;
+  const isPlayerWin = playerSpeed > enemySpeed;
   return isPlayerWin;
-}
+};
+
 const calculateRewards = (enemy: Character, isPlayerWin: boolean) => {
   const rewards = isPlayerWin
     ? {

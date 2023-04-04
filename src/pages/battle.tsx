@@ -14,7 +14,7 @@ const BattlePage: NextPage = () => {
     <DefaultLayout>
       {result && (
         <>
-          <BattleStatus character={result.character} enemy={result.enemy} />
+          <BattleStatus player={result.player} enemy={result.enemy} />
 
           <div
             className={classNames(
