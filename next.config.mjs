@@ -18,5 +18,13 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
+
+  /**
+   * Enable remote image src.
+   * @see https://nextjs.org/docs/messages/next-image-unconfigured-host
+   */
+  images: {
+    domains: ["lh3.googleusercontent.com"],
+  },
 };
 export default config;

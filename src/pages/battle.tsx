@@ -1,5 +1,6 @@
 import { type NextPage } from "next";
 import { BattleStatus } from "~/components/battle/BattleStatus";
+import DefaultLayout from "~/components/layout/DefaultLayout";
 import { api } from "~/utils/api";
 import { useSWR } from "~/utils/swr";
 
@@ -9,7 +10,7 @@ const Home: NextPage = () => {
   );
 
   return (
-    <main className="p-6">
+    <DefaultLayout>
       {result && (
         <>
           <BattleStatus character={result.character} enemy={result.enemy} />
@@ -29,7 +30,7 @@ const Home: NextPage = () => {
           </ul>
         </>
       )}
-    </main>
+    </DefaultLayout>
   );
 };
 
