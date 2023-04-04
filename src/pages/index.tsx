@@ -1,11 +1,11 @@
 import { type NextPage } from "next";
-import DefaultLayout from "~/components/layout/DefaultLayout";
+import PublicLayout from "~/components/layout/PublicLayout";
 
 const RootPage: NextPage = () => {
   return (
-    <DefaultLayout>
+    <PublicLayout>
       <h2 className="text-5xl font-extrabold">InflaG</h2>
-    </DefaultLayout>
+    </PublicLayout>
   );
 };
 
