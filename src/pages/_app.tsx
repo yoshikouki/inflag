@@ -8,6 +8,7 @@ import "~/styles/globals.css";
 // @see: https://fontawesome.com/docs/web/use-with/react/use-with
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import ThemeContextProvider from "~/components/ThemeContextProvider";
 config.autoAddCss = false;
 
 const mPlus1 = M_PLUS_1({
@@ -22,11 +23,13 @@ const MyApp: AppType<{ session: Session | null }> = ({
   pageProps: { session, ...pageProps },
 }) => {
   return (
-    <SessionProvider session={session}>
-      <div className={mPlus1.className}>
-        <Component {...pageProps} />
-      </div>
-    </SessionProvider>
+    <ThemeContextProvider>
+      <SessionProvider session={session}>
+        <div className={mPlus1.className}>
+          <Component {...pageProps} />
+        </div>
+      </SessionProvider>
+    </ThemeContextProvider>
   );
 };
 
