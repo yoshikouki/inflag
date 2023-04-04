@@ -6,17 +6,19 @@ import { useRouter } from "next/router";
 export const useAuth = (accessibleWithoutAuth = false) => {
   const { data: session, status } = useSession();
   const { user } = session && "user" in session ? session : { user: null };
+  const isAuthenticated = status === "authenticated";
+  const isLoading = status === "loading";
 
   const router = useRouter();
   useEffect(() => {
-    if (!user && !accessibleWithoutAuth) {
+    if (!isAuthenticated && !accessibleWithoutAuth && !isLoading) {
       void router.push("/signin");
     }
-  }, [accessibleWithoutAuth, router, user]);
+  }, [accessibleWithoutAuth, isAuthenticated, isLoading, router]);
 
   return {
-    isAuthenticated: status === "authenticated",
-    isLoading: status === "loading",
+    isAuthenticated,
+    isLoading,
     login: signIn,
     logout: signOut,
     user,
