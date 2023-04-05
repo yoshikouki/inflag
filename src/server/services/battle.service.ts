@@ -1,4 +1,4 @@
-import { generateBattleCharacter } from "../repositories/character. repository";
+import { generateBattleCharacter } from "../repositories/character.repository";
 
 import { type BattleCharacter } from "~/types/character.type";
 import { constants } from "~/constants";
