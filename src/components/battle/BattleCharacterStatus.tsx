@@ -5,10 +5,15 @@ interface Props {
   character: BattleCharacter;
   maxHitPoint: number;
   maxCharacterStatus: number;
+  isPlayer?: boolean;
 }
 
-export const BattleCharacterStatus = ({ character, maxHitPoint, maxCharacterStatus }: Props) => {
-
+export const BattleCharacterStatus = ({
+  character,
+  maxHitPoint,
+  maxCharacterStatus,
+  isPlayer = true,
+}: Props) => {
   return (
     <div className="overflow-hidden">
       <div className="overflow-x-scroll">
@@ -16,7 +21,7 @@ export const BattleCharacterStatus = ({ character, maxHitPoint, maxCharacterStat
       </div>
 
       <div className="mb-2">
-        <span className="text-gray-400 mr-1">Lv</span>
+        <span className="mr-1 text-gray-400">Lv</span>
         <span className="font-bold"> {character.level}</span>
       </div>
 
@@ -25,6 +30,7 @@ export const BattleCharacterStatus = ({ character, maxHitPoint, maxCharacterStat
           statusName="hitPoint"
           value={character.initialHitPoint}
           max={maxHitPoint}
+          isPlayer={isPlayer}
         />
       </div>
       <div className="mb-2">

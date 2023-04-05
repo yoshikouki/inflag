@@ -23,6 +23,7 @@ export const BattleStatus = ({ player: player, enemy }: Props) => {
         character={player}
         maxHitPoint={maxHitPoint}
         maxCharacterStatus={maxCharacterStatus}
+        isPlayer
       />
 
       <div className="mb-12 mt-4 animate-pulse text-center text-4xl font-extrabold opacity-60">
@@ -33,6 +34,7 @@ export const BattleStatus = ({ player: player, enemy }: Props) => {
         character={enemy}
         maxHitPoint={maxHitPoint}
         maxCharacterStatus={maxCharacterStatus}
+        isPlayer={false}
       />
     </>
   );

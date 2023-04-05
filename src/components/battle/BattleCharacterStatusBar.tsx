@@ -11,7 +11,8 @@ import classNames from "classnames";
 const statuses = {
   hitPoint: {
     icon: <FontAwesomeIcon icon={faHeart} />,
-    className: "bg-primary",
+    className: "bg-accent",
+    classNameForPlayer: "bg-primary",
   },
   attack: {
     icon: <FontAwesomeIcon icon={faFire} />,
@@ -31,9 +32,15 @@ interface Props {
   statusName: keyof typeof statuses;
   value: number;
   max: number;
+  isPlayer? : boolean;
 }
 
-export const BattleCharacterStatusBar = ({ statusName, value, max }: Props) => {
+export const BattleCharacterStatusBar = ({
+  statusName,
+  value,
+  max,
+  isPlayer,
+}: Props) => {
   const percentage = (value / max) * 100;
 
   return (
@@ -41,8 +48,11 @@ export const BattleCharacterStatusBar = ({ statusName, value, max }: Props) => {
       <div className="overflow-hiddenflex relative h-10 w-full rounded-lg bg-base-200">
         <div
           className={classNames([
-            "absolute h-10 animate-slide-right rounded-lg",
-            statuses[statusName]?.className,
+            "absolute h-10 rounded-lg",
+            "animate-slide-right",
+            isPlayer
+              ? statuses[statusName]?.classNameForPlayer
+              : statuses[statusName]?.className,
           ])}
           style={{ width: `${percentage}%` }}
         />
