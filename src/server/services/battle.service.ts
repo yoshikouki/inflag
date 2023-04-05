@@ -123,7 +123,7 @@ const determineNextActor = ({
   };
 };
 
-const calculateActionPoints = (
+export const calculateActionPoints = (
   character: BattleCharacter,
   actionPointLowerBound: number = constants.battle.actionPointLowerBound
 ) => {
