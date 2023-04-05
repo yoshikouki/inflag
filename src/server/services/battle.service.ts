@@ -3,10 +3,34 @@ import { generateBattleCharacter } from "../repositories/character. repository";
 import { type BattleCharacter } from "~/types/character.type";
 import { constants } from "~/constants";
 
-export const startBattle = () => {
+type BattleResult = {
+  player: BattleCharacter;
+  enemy: BattleCharacter;
+  endPlayer: BattleCharacter;
+  endEnemy: BattleCharacter;
+  isPlayerWin: boolean;
+  battleLogs: BattleLog[];
+  rewards: Rewards;
+};
+
+type BattleLog = {
+  attacker: BattleCharacter;
+  defender: BattleCharacter;
+  damage: number;
+};
+
+type Rewards = {
+  exp: number;
+  gold: number;
+};
+
+export const startBattle = (): BattleResult => {
   const player: BattleCharacter = generateBattleCharacter();
   const enemy: BattleCharacter = generateBattleCharacter();
-  const { isPlayerWin, battleLogs, endPlayer, endEnemy } = executeBattle({ player, enemy });
+  const { isPlayerWin, battleLogs, endPlayer, endEnemy } = executeBattle({
+    player,
+    enemy,
+  });
   const rewards = calculateRewards(enemy, isPlayerWin);
   return {
     player,
@@ -41,18 +65,23 @@ const executeBattle = ({
   while (latestAction.player.hitPoint > 0 && latestAction.enemy.hitPoint > 0) {
     actionsNumber++;
     if (actionsNumber > 100) {
-      return { isPlayerWin: false, battleLogs: actionLogs };
+      return {
+        isPlayerWin: false,
+        battleLogs: actionLogs,
+        endPlayer: latestAction.player,
+        endEnemy: latestAction.enemy,
+      };
     }
 
-    const { attacker, defender } = determineNextActor({
+    const { attacker, defender, isPlayerAttack } = determineNextActor({
       player: latestAction.player,
       enemy: latestAction.enemy,
     });
-    latestAction = {
-      player: latestAction.player,
-      enemy: latestAction.enemy,
-      log: performCharacterAction({ attacker, defender }),
-    };
+    latestAction = performCharacterAction({
+      attacker,
+      defender,
+      isPlayerAttack,
+    });
     actionLogs.push(latestAction.log);
   }
 
@@ -77,38 +106,41 @@ const determineNextActor = ({
   const nextEnemy = calculateActionPoints(enemy);
   let attacker: BattleCharacter = nextPlayer;
   let defender: BattleCharacter = nextEnemy;
+  let isPlayerAttack = true;
 
   if (
     actionPointUpperBound <= nextPlayer.actionPoints &&
     actionPointUpperBound <= nextEnemy.actionPoints
   ) {
     if (nextEnemy.actionPoints <= nextPlayer.actionPoints) {
-      nextPlayer.actionPoints = 0;
-      attacker = nextPlayer;
+      attacker = { ...nextPlayer, actionPoints: 0 };
       defender = nextEnemy;
+      isPlayerAttack = true;
     } else {
-      nextEnemy.actionPoints = 0;
-      attacker = nextEnemy;
+      attacker = { ...nextEnemy, actionPoints: 0 };
       defender = nextPlayer;
+      isPlayerAttack = false;
     }
   } else if (actionPointUpperBound <= nextPlayer.actionPoints) {
-    nextPlayer.actionPoints = 0;
-    attacker = nextPlayer;
+    attacker = { ...nextPlayer, actionPoints: 0 };
     defender = nextEnemy;
+    isPlayerAttack = true;
   } else if (actionPointUpperBound <= nextEnemy.actionPoints) {
-    nextEnemy.actionPoints = 0;
-    attacker = nextEnemy;
+    attacker = { ...nextEnemy, actionPoints: 0 };
     defender = nextPlayer;
+    isPlayerAttack = false;
   }
+
   return {
     attacker,
     defender,
+    isPlayerAttack,
   };
 };
 
 const calculateActionPoints = (
   character: BattleCharacter,
-  actionPointLowerBound: number = constants.battle.actionPointLowerBound,
+  actionPointLowerBound: number = constants.battle.actionPointLowerBound
 ) => {
   const speed = Math.max(character.speed, actionPointLowerBound);
   return {
@@ -120,20 +152,30 @@ const calculateActionPoints = (
 const performCharacterAction = ({
   attacker,
   defender,
+  isPlayerAttack,
 }: {
   attacker: BattleCharacter;
   defender: BattleCharacter;
+  isPlayerAttack: boolean;
 }) => {
   const damage = Math.max(attacker.attack - defender.defense, 0);
-  defender.hitPoint = Math.max(defender.hitPoint - damage, 0);
+  const defenderHitPoint = Math.max(defender.hitPoint - damage, 0);
+  const latestDefender = { ...defender, hitPoint: defenderHitPoint };
   return {
-    attacker,
-    defender,
-    damage,
-  }
+    player: isPlayerAttack ? attacker : latestDefender,
+    enemy: isPlayerAttack ? latestDefender : attacker,
+    log: {
+      attacker,
+      defender: latestDefender,
+      damage,
+    },
+  };
 };
 
-const calculateRewards = (enemy: BattleCharacter, isPlayerWin: boolean) => {
+const calculateRewards = (
+  enemy: BattleCharacter,
+  isPlayerWin: boolean
+): Rewards => {
   const rewards = isPlayerWin
     ? {
         exp: enemy.level * 10,
