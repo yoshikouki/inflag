@@ -8,6 +8,17 @@ export type Character = {
   speed: number;
 }
 
-export type BattleCharacter = Character & {
+export type BattleCharacter = {
+  id: string;
+  name: string;
+  level: number;
   actionPoints: number;
-}
+  initialHitPoint: number;
+  currentHitPoint: number;
+  initialAttack: number;
+  currentAttack: number;
+  initialDefense: number;
+  currentDefense: number;
+  initialSpeed: number;
+  currentSpeed: number;
+};

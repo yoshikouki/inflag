@@ -15,8 +15,19 @@ export const generateCharacter = (): Character => {
 };
 
 export const generateBattleCharacter = (): BattleCharacter => {
+  const character = generateCharacter();
   return {
-    ...generateCharacter(),
+    id: character.id,
+    name: character.name,
+    level: character.level,
     actionPoints: 0,
+    initialHitPoint: character.hitPoint,
+    currentHitPoint: character.hitPoint,
+    initialAttack: character.attack,
+    currentAttack: character.attack,
+    initialDefense: character.defense,
+    currentDefense: character.defense,
+    initialSpeed: character.speed,
+    currentSpeed: character.speed,
   };
 };
