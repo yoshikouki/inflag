@@ -1,8 +1,8 @@
+import { type BattleCharacter } from "~/types/character.type";
 import { BattleCharacterStatusBar } from "./BattleCharacterStatusBar";
-import { type Character } from "~/server/services/battle.service";
 
 interface Props {
-  character: Character;
+  character: BattleCharacter;
   maxHitPoint: number;
   maxCharacterStatus: number;
 }
@@ -23,28 +23,28 @@ export const BattleCharacterStatus = ({ character, maxHitPoint, maxCharacterStat
       <div className="mb-2">
         <BattleCharacterStatusBar
           statusName="hitPoint"
-          value={character.hitPoint}
+          value={character.initialHitPoint}
           max={maxHitPoint}
         />
       </div>
       <div className="mb-2">
         <BattleCharacterStatusBar
           statusName="attack"
-          value={character.attack}
+          value={character.initialAttack}
           max={maxCharacterStatus}
         />
       </div>
       <div className="mb-2">
         <BattleCharacterStatusBar
           statusName="defense"
-          value={character.defense}
+          value={character.initialDefense}
           max={maxCharacterStatus}
         />
       </div>
       <div className="mb-2">
         <BattleCharacterStatusBar
           statusName="speed"
-          value={character.speed}
+          value={character.initialSpeed}
           max={maxCharacterStatus}
         />
       </div>

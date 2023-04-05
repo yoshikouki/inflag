@@ -1,22 +1,22 @@
-import { type Character } from "~/types/character.type";
+import { type BattleCharacter } from "~/types/character.type";
 import { BattleCharacterStatus } from "./BattleCharacterStatus";
 
 interface Props {
-  player: Character;
-  enemy: Character;
+  player: BattleCharacter;
+  enemy: BattleCharacter;
 }
 
 export const BattleStatus = ({ player: player, enemy }: Props) => {
-  const getCharacterStatus = ({ attack, defense, speed }: Character) => [
-    attack,
-    defense,
-    speed,
-  ];
+  const getCharacterStatus = ({
+    initialAttack,
+    initialDefense,
+    initialSpeed,
+  }: BattleCharacter) => [initialAttack, initialDefense, initialSpeed];
   const maxCharacterStatus = Math.max(
     ...getCharacterStatus(player),
     ...getCharacterStatus(enemy)
   );
-  const maxHitPoint = Math.max(player.hitPoint, enemy.hitPoint);
+  const maxHitPoint = Math.max(player.initialHitPoint, enemy.initialHitPoint);
   return (
     <>
       <BattleCharacterStatus
