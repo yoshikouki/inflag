@@ -8,8 +8,8 @@ export const generateCharacter = (): Character => {
     name: faker.internet.userName(),
     level: faker.datatype.number({ min: 1, max: 100 }),
     hitPoint: faker.datatype.number({ min: 10, max: 100 }),
-    attack: faker.datatype.number({ min: 1, max: 10 }),
-    defense: faker.datatype.number({ min: 1, max: 10 }),
+    attack: faker.datatype.number({ min: 5, max: 10 }),
+    defense: faker.datatype.number({ min: 1, max: 6 }),
     speed: faker.datatype.number({ min: 1, max: 10 }),
   };
 };

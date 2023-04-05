@@ -1,4 +1,4 @@
-import { type Character } from "~/server/services/battle.service";
+import { type Character } from "~/types/character.type";
 import { BattleCharacterStatus } from "./BattleCharacterStatus";
 
 interface Props {
