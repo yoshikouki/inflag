@@ -38,6 +38,8 @@ const executeBattle = ({
       attacker: player,
       defender: enemy,
       damage: 0,
+      actionsNumber,
+      isPlayerAttack: true,
     },
   };
 
@@ -145,13 +147,14 @@ const performCharacterAction = ({
 }) => {
   const damage = Math.max(attacker.currentAttack - defender.currentDefense, 0);
   const defenderHitPoint = Math.max(defender.currentHitPoint - damage, 0);
-  const latestDefender = { ...defender, hitPoint: defenderHitPoint };
+  const latestDefender = { ...defender, currentHitPoint: defenderHitPoint };
   return {
     player: isPlayerAttack ? attacker : latestDefender,
     enemy: isPlayerAttack ? latestDefender : attacker,
     log: {
       attacker,
       defender: latestDefender,
+      isPlayerAttack,
       damage,
       actionsNumber,
     },
