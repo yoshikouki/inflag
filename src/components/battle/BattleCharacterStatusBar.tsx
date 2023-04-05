@@ -17,14 +17,17 @@ const statuses = {
   attack: {
     icon: <FontAwesomeIcon icon={faFire} />,
     className: "bg-base-content opacity-80",
+    classNameForPlayer: "bg-base-content opacity-80",
   },
   defense: {
     icon: <FontAwesomeIcon icon={faShield} />,
     className: "bg-base-content opacity-80",
+    classNameForPlayer: "bg-base-content opacity-80",
   },
   speed: {
     icon: <FontAwesomeIcon icon={faGaugeSimple} />,
     className: "bg-base-content opacity-80",
+    classNameForPlayer: "bg-base-content opacity-80",
   },
 };
 
