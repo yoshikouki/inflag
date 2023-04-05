@@ -39,18 +39,26 @@ const BattlePage: NextPage = () => {
                     </span>
                   </div>
                   <div className="mb-2">
-                    <span className="font-bold mr-1">
-                      {log.attacker.name}
-                    </span>
+                    <span className="mr-1 font-bold">{log.attacker.name}</span>
                     の攻撃！
                   </div>
                   <div className="mb-4">
-                    <span className="text-4xl font-extrabold mr-1">
+                    <span className="mr-1 text-4xl font-extrabold">
                       {log.damage}
                     </span>
                     のダメージ！
                   </div>
-                  <div className="overflow-hiddenflex relative mb-2 h-4 w-full rounded-lg bg-base-200">
+                  <div
+                    className={classNames(
+                      "overflow-hiddenflex relative mb-2 h-4 w-full rounded-lg bg-base-200",
+                      "tooltip tooltip-bottom",
+                      {
+                        "tooltip-accent": log.isPlayerAttack,
+                        "tooltip-primary": !log.isPlayerAttack,
+                      }
+                    )}
+                    data-tip={`${log.defender.currentHitPoint} / ${log.defender.initialHitPoint}`}
+                  >
                     <div
                       className={classNames([
                         "absolute h-4 rounded-lg",
