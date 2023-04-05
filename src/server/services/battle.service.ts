@@ -125,12 +125,14 @@ const determineNextActor = ({
 
 export const calculateActionPoints = (
   character: BattleCharacter,
-  actionPointLowerBound: number = constants.battle.actionPointLowerBound
+  actionPointLowerBound: number = constants.battle.actionPointLowerBound,
+  randomFactor: number = Math.random() * 10
 ) => {
   const speed = Math.max(character.currentSpeed, actionPointLowerBound);
+  const actionPoints = character.actionPoints + speed * randomFactor;
   return {
     ...character,
-    actionPoints: character.actionPoints + speed + Math.random() * 10,
+    actionPoints,
   };
 };
 
