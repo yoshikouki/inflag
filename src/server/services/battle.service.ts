@@ -80,6 +80,11 @@ const performCharacterAction = ({
 }) => {
   const damage = Math.max(attacker.attack - defender.defense, 0);
   defender.hitPoint = Math.max(defender.hitPoint - damage, 0);
+  return {
+    attacker,
+    defender,
+    damage,
+  }
 };
 
 const calculateRewards = (enemy: BattleCharacter, isPlayerWin: boolean) => {
