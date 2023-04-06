@@ -57,6 +57,11 @@ const executeBattle = ({
       };
     }
 
+    latestAction = {
+      ...latestAction,
+      player: calculateActionPoints(latestAction.player),
+      enemy: calculateActionPoints(latestAction.enemy),
+    };
     const { attacker, defender, isPlayerAttack } = determineNextActor({
       player: latestAction.player,
       enemy: latestAction.enemy,
@@ -78,55 +83,30 @@ const executeBattle = ({
   };
 };
 
-const determineNextActor = ({
+export const determineNextActor = ({
   player,
   enemy,
-  actionPointUpperBound = constants.battle.actionPointUpperBound,
 }: {
   player: BattleCharacter;
   enemy: BattleCharacter;
-  actionPointUpperBound?: number;
 }) => {
-  const nextPlayer = calculateActionPoints(player);
-  const nextEnemy = calculateActionPoints(enemy);
-  let attacker: BattleCharacter = nextPlayer;
-  let defender: BattleCharacter = nextEnemy;
-  let isPlayerAttack = true;
-
-  if (
-    actionPointUpperBound <= nextPlayer.actionPoints &&
-    actionPointUpperBound <= nextEnemy.actionPoints
-  ) {
-    if (nextEnemy.actionPoints <= nextPlayer.actionPoints) {
-      attacker = { ...nextPlayer, actionPoints: 0 };
-      defender = nextEnemy;
-      isPlayerAttack = true;
-    } else {
-      attacker = { ...nextEnemy, actionPoints: 0 };
-      defender = nextPlayer;
-      isPlayerAttack = false;
-    }
-  } else if (actionPointUpperBound <= nextPlayer.actionPoints) {
-    attacker = { ...nextPlayer, actionPoints: 0 };
-    defender = nextEnemy;
-    isPlayerAttack = true;
-  } else if (actionPointUpperBound <= nextEnemy.actionPoints) {
-    attacker = { ...nextEnemy, actionPoints: 0 };
-    defender = nextPlayer;
-    isPlayerAttack = false;
-  }
-
-  return {
-    attacker,
-    defender,
-    isPlayerAttack,
-  };
+  return enemy.actionPoints <= player.actionPoints
+    ? {
+        attacker: { ...player, actionPoints: 0 },
+        defender: enemy,
+        isPlayerAttack: true,
+      }
+    : {
+        attacker: { ...enemy, actionPoints: 0 },
+        defender: player,
+        isPlayerAttack: false,
+      };
 };
 
 export const calculateActionPoints = (
   character: BattleCharacter,
   actionPointLowerBound: number = constants.battle.actionPointLowerBound,
-  randomFactor: number = Math.random() * 10
+  randomFactor: number = (Math.random() + 1) * 10
 ) => {
   const speed = Math.max(character.currentSpeed, actionPointLowerBound);
   const actionPoints = character.actionPoints + speed * randomFactor;
