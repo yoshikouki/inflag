@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { type NextPage } from "next";
+import { ScrollToBottomButton } from "~/components/ScrollToBottomButton";
 import { BattleStatus } from "~/components/battle/BattleStatus";
 import DefaultLayout from "~/components/layout/DefaultLayout";
 import { api } from "~/utils/api";
@@ -112,6 +113,8 @@ const BattlePage: NextPage = () => {
               <span className="font-bold">{result?.rewards.gold}</span>
             </li>
           </ul>
+
+          <ScrollToBottomButton />
         </>
       )}
     </DefaultLayout>
