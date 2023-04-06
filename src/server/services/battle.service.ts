@@ -22,7 +22,7 @@ export const startBattle = () => {
   };
 };
 
-const executeBattle = ({
+export const executeBattle = ({
   player,
   enemy,
 }: {
@@ -116,7 +116,7 @@ export const calculateActionPoints = (
   };
 };
 
-const performCharacterAction = ({
+export const performCharacterAction = ({
   attacker,
   defender,
   isPlayerAttack,
@@ -143,7 +143,7 @@ const performCharacterAction = ({
   };
 };
 
-const calculateRewards = (enemy: BattleCharacter, isPlayerWin: boolean) => {
+export const calculateRewards = (enemy: BattleCharacter, isPlayerWin: boolean) => {
   const rewards = isPlayerWin
     ? {
         exp: enemy.level * 10,
