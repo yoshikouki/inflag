@@ -3,18 +3,21 @@ import { type BattleCharacter, type Character } from "~/types/character.type";
 import { faker } from "@faker-js/faker";
 
 export const generateCharacter = (attr?: Partial<Character>): Character => {
+  const level = attr?.level || faker.datatype.number({ min: 1000, max: 5000 });
   return {
     id: attr?.id || faker.datatype.uuid(),
     name: attr?.name || faker.internet.userName(),
-    level: attr?.level || faker.datatype.number({ min: 1000, max: 5000 }),
-    hitPoint: attr?.hitPoint || faker.datatype.number({ min: 10000, max: 50000 }),
-    attack: attr?.attack || faker.datatype.number({ min: 3000, max: 8000 }),
-    defense: attr?.defense || faker.datatype.number({ min: 1000, max: 5000 }),
-    speed: attr?.speed || faker.datatype.number({ min: 1000, max: 5000 }),
+    level,
+    hitPoint: attr?.hitPoint || Math.round(level * Math.random() * 10),
+    attack: attr?.attack || Math.round(level * Math.random() * 2),
+    defense: attr?.defense || Math.round(level * Math.random() * 1),
+    speed: attr?.speed || Math.round(level * Math.random() * 1),
   };
 };
 
-export const generateBattleCharacter = (attr?: Partial<BattleCharacter> & { character?: Character }): BattleCharacter => {
+export const generateBattleCharacter = (
+  attr?: Partial<BattleCharacter> & { character?: Character }
+): BattleCharacter => {
   const character = attr?.character || generateCharacter();
   return {
     id: attr?.id || character.id,
