@@ -3,7 +3,7 @@ import { type BattleCharacter, type Character } from "~/types/character.type";
 import { faker } from "@faker-js/faker";
 
 export const generateCharacter = (attr?: Partial<Character>): Character => {
-  const level = attr?.level || faker.datatype.number({ min: 1000, max: 5000 });
+  const level = attr?.level || faker.datatype.number({ min: 1000, max: 1000 });
   return {
     id: attr?.id || faker.datatype.uuid(),
     name: attr?.name || faker.internet.userName(),
