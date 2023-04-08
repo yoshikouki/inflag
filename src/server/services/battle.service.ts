@@ -143,7 +143,10 @@ export const performCharacterAction = ({
   };
 };
 
-export const calculateRewards = (enemy: BattleCharacter, isPlayerWin: boolean) => {
+export const calculateRewards = (
+  enemy: BattleCharacter,
+  isPlayerWin: boolean
+): { exp: number; gold: number } => {
   const rewards = isPlayerWin
     ? {
         exp: enemy.level * 10,
