@@ -1,4 +1,10 @@
-import { calculateActionPoints, calculateRewards, determineNextActor, executeBattle, performCharacterAction } from "./battle.service";
+import {
+  calculateActionPoints,
+  calculateRewards,
+  determineNextActor,
+  executeBattle,
+  performCharacterAction,
+} from "./battle.service";
 import { describe, expect, it } from "vitest";
 
 import { generateBattleCharacter } from "../repositories/character.repository";
@@ -28,8 +34,8 @@ describe("#determineNextActor", () => {
   });
 
   it("should return the player as the attacker when their action points are equal to the enemy", () => {
-    const player = generateBattleCharacter({actionPoints: 10});
-    const enemy = generateBattleCharacter({actionPoints: 10});
+    const player = generateBattleCharacter({ actionPoints: 10 });
+    const enemy = generateBattleCharacter({ actionPoints: 10 });
 
     const result = determineNextActor({ player, enemy });
 
@@ -171,7 +177,7 @@ describe("#calculateRewards", () => {
   });
 });
 
-describe('#executeBattle', () => {
+describe("#executeBattle", () => {
   it("should return an object containing logs of each action", () => {
     const player = generateBattleCharacter();
     const enemy = generateBattleCharacter();
