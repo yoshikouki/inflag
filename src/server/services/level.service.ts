@@ -10,17 +10,25 @@ export const calculateCumulativeExpForNextLevel = (level: number): number =>
 export const levelUp = (
   character: BattleCharacter,
   gainedExp: number
-): BattleCharacter => {
+): {
+  character: BattleCharacter,
+  hasLeveledUp: boolean,
+} => {
   const newExp = character.exp + gainedExp;
   let newLevel = character.level;
+  let hasLeveledUp = false;
 
   while (newExp >= calculateCumulativeExpForNextLevel(newLevel)) {
     newLevel++;
+    hasLeveledUp ||= true;
   }
 
   return {
-    ...character,
-    level: newLevel,
-    exp: newExp,
+    character: {
+      ...character,
+      level: newLevel,
+      exp: newExp,
+    },
+    hasLeveledUp,
   };
 };

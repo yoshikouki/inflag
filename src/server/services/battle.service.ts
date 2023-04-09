@@ -2,6 +2,7 @@ import { generateBattleCharacter } from "../repositories/character.repository";
 
 import { type BattleCharacter } from "~/types/character.type";
 import { constants } from "~/constants";
+import { levelUp } from "./level.service";
 
 export const startBattle = () => {
   const player: BattleCharacter = generateBattleCharacter();
@@ -11,12 +12,14 @@ export const startBattle = () => {
     enemy,
   });
   const rewards = calculateRewards(enemy, isPlayerWin);
+  const { character: resultPlayer, hasLeveledUp } = levelUp(endPlayer, rewards.exp);
   return {
     player,
     enemy,
-    endPlayer,
+    endPlayer: resultPlayer,
     endEnemy,
     isPlayerWin,
+    hasLeveledUp,
     battleLogs,
     rewards,
   };

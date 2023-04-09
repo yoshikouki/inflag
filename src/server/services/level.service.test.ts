@@ -5,16 +5,16 @@ import { generateBattleCharacter } from "../repositories/character.repository";
 
 describe("#levelUp", () => {
   it("should level up once and have remaining exp", () => {
-    const initializeExp = calculateCumulativeExpForNextLevel(1) - 1;
     const character = generateBattleCharacter({
       level: 1,
-      exp: initializeExp,
+      exp: calculateCumulativeExpForNextLevel(1),
     });
 
-    const result = levelUp(character, 1);
-    expect(result.level).toBe(2);
-    expect(result.exp).toBe(character.exp + 1);
-    expect(character.exp).toBe(initializeExp); // immutable
+    const { character: newCharacter, hasLeveledUp } = levelUp(character, 1);
+    expect(newCharacter.level).toBe(2);
+    expect(newCharacter.exp).toBe(character.exp + 1);
+    expect(hasLeveledUp).toBe(true);
+    expect(character.exp).toBe(calculateCumulativeExpForNextLevel(1)); // immutable
   });
 
   it("should level up multiple times and have remaining exp", () => {
@@ -23,9 +23,13 @@ describe("#levelUp", () => {
       exp: 0,
     });
 
-    const result = levelUp(character, calculateCumulativeExpForLevel(4));
-    expect(result.level).toBe(4);
-    expect(result.exp).toBe(calculateCumulativeExpForLevel(4));
+    const { character: newCharacter, hasLeveledUp } = levelUp(
+      character,
+      calculateCumulativeExpForLevel(4)
+    );
+    expect(newCharacter.level).toBe(4);
+    expect(newCharacter.exp).toBe(calculateCumulativeExpForLevel(4));
+    expect(hasLeveledUp).toBe(true);
   });
 
   it("should not level up if not enough exp", () => {
@@ -34,8 +38,9 @@ describe("#levelUp", () => {
       exp: calculateCumulativeExpForNextLevel(1) - 1,
     });
 
-    const result = levelUp(character, 0);
-    expect(result.level).toBe(1);
-    expect(result.exp).toBe(character.exp);
+    const { character: newCharacter, hasLeveledUp } = levelUp(character, 0);
+    expect(newCharacter.level).toBe(1);
+    expect(newCharacter.exp).toBe(character.exp);
+    expect(hasLeveledUp).toBe(false);
   });
 });
